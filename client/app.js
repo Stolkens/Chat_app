@@ -1,5 +1,9 @@
 const socket = io();
 
+// socket.on('message', addMessage)
+// socket.on('message', (event) => addMessage(event.author, event.content))
+socket.on('message', ({ author, content }) => addMessage(author, content));
+
 let userName = '';
 const loginForm = document.getElementById('welcome-form');
 const messagesSection = document.getElementById('messages-section');
@@ -41,6 +45,7 @@ const sendMessage = (e) => {
   }
   else {
     addMessage(userName, messageContentInput.value);
+    socket.emit('message', {author: userName, content: messageContentInput.value});
     messageContentInput.value = '';
   }
 }
