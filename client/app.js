@@ -6,7 +6,6 @@ const messagesList = document.getElementById('messages-list');
 const addMessageForm = document.getElementById('add-messages-form');
 const userNameInput = document.getElementById('username');
 const messageContentInput = document.getElementById('message-content');
-console.log(messageContentInput)
 
 const login = (e) => {
   e.preventDefault()
@@ -25,14 +24,14 @@ const joinButton = document.getElementById('join');
 joinButton.addEventListener('click', login);
 
 const addMessage = (messageAuthor, messageContent ) => {
-  let message = '<li class="message message--received"></li>';
+  const message = document.createElement('li');
+  message.classList.add('message', 'message--received');
   if (messageAuthor === userName) {
-    message = '<li class="message message--received message--self"><h3 class="message__author">You</h3><div class="message__content">'+ messageContent +'</div></li>';
-    messagesList.innerHTML += message;
-  } 
-
-  
-}
+    message.classList.add('message--self');
+    message.innerHTML = `<h3 class="message__author">You</h3><div class="message__content">${messageContent}</div>`;
+    messagesList.appendChild(message);
+  }
+};
   
 const sendMessage = (e) => {
   e.preventDefault();
