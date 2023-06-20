@@ -1,3 +1,4 @@
+const socket = io();
 
 let userName = '';
 const loginForm = document.getElementById('welcome-form');
