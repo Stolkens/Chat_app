@@ -6,6 +6,7 @@
   "author": "Stolkens <92957952+Stolkens@users.noreply.github.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/socket.io": "^3.0.2",
     "nodemon": "^2.0.22"
   },
   "scripts": {
