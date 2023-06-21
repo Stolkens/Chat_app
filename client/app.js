@@ -16,7 +16,7 @@ loginForm.addEventListener('submit', function login(event) {
       userName = userNameInput.value;
       loginForm.classList.remove('show');
       messagesSection.classList.add('show');
-      socket.emit('user', { author: userName })
+      socket.emit('user', { author: userName, id: socket.id })
       console.log('logged in as:', userName);
       
     } else {
