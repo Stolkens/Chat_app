@@ -24,34 +24,29 @@ io.on('connection', (socket) => {
 
   socket.on('user', (user) => {
 
-    users.push( user );
+    users.push(user);
+
     console.log('users', users)
-    console.log('user.id',user.id)
-    console.log('socket.id', socket.id)
+
   })
 
   socket.on('message', (message) => { 
   
   messages.push(message);
-  console.log('messages', messages)
   
   socket.broadcast.emit('message', message);
 
   });
 
-  console.log('users', users)
-
-  socket.on('disconnect', () => 
-  { console.log('Oh, socket ' + socket.id + ' has left') });
-  console.log(users.findIndex(user => user.id === socket.id ))
-  const userIndex = users.findIndex(user => user.id === socket.id );
+  socket.on('disconnect', () => { 
+    
+    const user = users.find(user => user.id === socket.id );
   
-  
-  console.log('userIndex',userIndex)
-  if (userIndex !== -1) {
-    users.splice(userIndex, 1);
-    console.log('users koncowe', users);
+    if (user) {
+      const userIndex = users.indexOf(user)
+      users.splice(userIndex, 1);
+      socket.broadcast.emit('message', {author: 'ChatBot', content: user.author + ' has left'});
   }
-  
+});
 });
  
